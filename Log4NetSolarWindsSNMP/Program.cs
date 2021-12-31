@@ -33,12 +33,18 @@ namespace Log4NetSolarWindsSNMP
                 string log4netLocation = AppDomain.CurrentDomain.BaseDirectory + "log4net.dll";
                 Console.WriteLine(log4netLocation);
                 dll = Assembly.LoadFrom(log4netLocation);
+                Console.WriteLine("New log4net assembly: " + dll.FullName);
             }
             return dll;
         }
         private static void  MyLoadEventHandler(object sender, AssemblyLoadEventArgs args)
         {
-            Console.WriteLine("MyLoadEventHandler: " + args.LoadedAssembly.GetName());
+            AssemblyName loadedAssembly = args.LoadedAssembly.GetName();
+            Console.WriteLine("MyLoadEventHandler: " + loadedAssembly.FullName);
+            if(loadedAssembly.Name.Contains("log4net"))
+            {
+
+            }
         }
     }
 }
